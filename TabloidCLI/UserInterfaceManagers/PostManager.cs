@@ -54,6 +54,15 @@ namespace TabloidCLI.UserInterfaceManagers
             }
         }
 
+        private void List()
+        {
+            List<Post> posts = _postRepository.GetAll();
+            foreach (Post post in posts)
+            {
+                Console.WriteLine(post);
+            }
+        }
+
         private void Add()
         {
             Console.WriteLine("New Post");
