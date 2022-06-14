@@ -36,7 +36,8 @@ namespace TabloidCLI.UserInterfaceManagers
             switch (choice)
             {
                 case "1":
-                    throw new NotImplementedException();
+                    List();
+                    return this;
                 case "2":
                     throw new NotImplementedException();
                 case "3":
