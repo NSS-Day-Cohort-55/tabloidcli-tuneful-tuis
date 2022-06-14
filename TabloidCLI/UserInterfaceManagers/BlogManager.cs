@@ -23,6 +23,8 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 1) List Blogs");
             Console.WriteLine(" 2) Blog Details");
             Console.WriteLine(" 3) Add Blog");
+            Console.WriteLine(" 4) Edit Blog");
+            Console.WriteLine(" 5) Remove Blog");
             Console.WriteLine(" 0) Go Back");
 
             Console.Write("> ");
@@ -51,9 +53,8 @@ namespace TabloidCLI.UserInterfaceManagers
                     //Edit();
                     //return this;
                 case "5":
-                    throw new NotImplementedException();
-                    //Remove();
-                    //return this;
+                    Remove();
+                    return this;
                 case "0":
                     return _parentUI;
                 default:
@@ -145,12 +146,11 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Remove()
         {
-            throw new NotImplementedException();
-            //Blog blogToDelete = Choose("Which blog would you like to remove?");
-            //if (blogToDelete != null)
-            //{
-            //    _blogRepository.Delete(blogToDelete.Id);
-            //}
+            Blog blogToDelete = Choose("Which blog would you like to remove?");
+            if (blogToDelete != null)
+            {
+                _blogRepository.Delete(blogToDelete.Id);
+            }
         }
     }
 }
