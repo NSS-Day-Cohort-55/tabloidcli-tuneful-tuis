@@ -12,7 +12,35 @@ namespace TabloidCLI
 
         public List<Blog> GetAll()
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT id,
+                                               Title,
+                                               Url
+                                          FROM Blog";
+
+                    List<Blog> blogs = new List<Blog>();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Blog blog = new Blog()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
+                            Url = reader.GetString(reader.GetOrdinal("Url")),
+                        };
+                        blogs.Add(blog);
+                    }
+
+                    reader.Close();
+
+                    return blogs;
+                }
+            }
         }
 
         public Blog Get(int id)
