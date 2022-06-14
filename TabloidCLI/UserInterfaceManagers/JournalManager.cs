@@ -132,7 +132,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Remove()
         {
-            Journal entryToDelete = Choose("Which author would you like to remove?");
+            Journal entryToDelete = Choose("Which journal entry would you like to remove?");
             if (entryToDelete != null)
             {
                 _journalRepository.Delete(entryToDelete.Id);

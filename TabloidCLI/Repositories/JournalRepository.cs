@@ -93,6 +93,7 @@ namespace TabloidCLI
                                         FROM Journal
                                         WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
