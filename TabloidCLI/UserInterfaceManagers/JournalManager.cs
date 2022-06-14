@@ -9,14 +9,12 @@ namespace TabloidCLI.UserInterfaceManagers
         private readonly IUserInterfaceManager _parentUI;
         private JournalRepository _journalRepository;
         private string _connectionString;
-
         public JournalManager(IUserInterfaceManager parentUI, string connectionString)
         {
             _parentUI = parentUI;
             _journalRepository = new JournalRepository(connectionString);
             _connectionString = connectionString;
         }
-
         public IUserInterfaceManager Execute()
         {
             Console.WriteLine("Journal Menu");
@@ -57,7 +55,6 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.WriteLine(entry.Title);
             }
         }
-
         private void Add()
         {
             Console.WriteLine("New Journal Entry");
@@ -73,7 +70,6 @@ namespace TabloidCLI.UserInterfaceManagers
 
             _journalRepository.Insert(entry);
         }
-
         private Journal Choose(string prompt = null)
         {
             if (prompt == null)
@@ -129,7 +125,6 @@ namespace TabloidCLI.UserInterfaceManagers
 
             _journalRepository.Update(entryToEdit);
         }
-
         private void Remove()
         {
             Journal entryToDelete = Choose("Which journal entry would you like to remove?");

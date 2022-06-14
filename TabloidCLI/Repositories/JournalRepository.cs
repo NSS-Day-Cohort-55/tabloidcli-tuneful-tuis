@@ -10,7 +10,7 @@ namespace TabloidCLI
     {
         public JournalRepository(string connectionString) : base(connectionString) { }
 
-        /*This is all the stuff an IRepository is required to implement*/
+        /*These are all the methods an IRepository is required to implement*/
         public List<Journal> GetAll()
         {
             using (SqlConnection conn = Connection)
@@ -77,8 +77,6 @@ namespace TabloidCLI
                     cmd.Parameters.AddWithValue("@id", entry.Id);
 
                     cmd.ExecuteNonQuery();
-
-
                 }
             }
         }
