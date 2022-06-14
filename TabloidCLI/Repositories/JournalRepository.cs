@@ -54,7 +54,8 @@ namespace TabloidCLI
                     cmd.CommandText = @"INSERT INTO Journal (Id, Title, Content, CreateDateTime)
                                         Values(@id, @title, @content, @createDateTime)";
                     cmd.Parameters.AddWithValue("@id", entry.Id);
-                    cmd.Parameters.AddWithValue("@Title", entry.Title);
+                    cmd.Parameters.AddWithValue("@title", entry.Title);
+                    cmd.Parameters.AddWithValue("@content", entry.Content);
                     cmd.Parameters.AddWithValue("@createDateTime", entry.CreateDateTime);
 
                     cmd.ExecuteNonQuery();
@@ -63,7 +64,24 @@ namespace TabloidCLI
         }
         public void Update(Journal entry)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Journal
+                                        SET Title =@title,
+                                        Content = @content
+                                        WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@title", entry.Title);
+                    cmd.Parameters.AddWithValue("@content", entry.Content);
+                    cmd.Parameters.AddWithValue("@id", entry.Id);
+
+                    cmd.ExecuteNonQuery();
+
+
+                }
+            }
         }
         public void Delete(int id)
         {
