@@ -46,7 +46,8 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "4":
                     throw new NotImplementedException();
                 case "5":
-                    throw new NotImplementedException();
+                    Remove();
+                    return this;
                 case "0":
                     return _parentUI;
                 default:
