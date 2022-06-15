@@ -34,6 +34,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     SearchAuthors();
                     return this;
                 case "3":
+                    SearchPosts();
                     return this;
                 case "4":
                     return this;

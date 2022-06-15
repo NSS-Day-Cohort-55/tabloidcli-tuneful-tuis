@@ -143,7 +143,7 @@ namespace TabloidCLI
                 {
                     cmd.CommandText = @"SELECT b.id,
                                                b.Title,
-                                               b.URL,
+                                               b.URL
                                           FROM Blog b
                                                LEFT JOIN BlogTag bt on b.Id = bt.BlogId
                                                LEFT JOIN Tag t on t.Id = bt.TagId
@@ -171,6 +171,7 @@ namespace TabloidCLI
             }
         }
 
+        /*Once tags can be added to Posts, this method may need to be updated to show the author's name and the blog name*/
         public SearchResults<Post> SearchPosts(string tagName)
         {
             using (SqlConnection conn = Connection)
@@ -182,7 +183,7 @@ namespace TabloidCLI
                                                p.Title,
                                                p.URL,
                                                p.PublishDateTime,
-                                               p.AuthorId
+                                               p.AuthorId,
                                                p.BlogId
                                           FROM Post p
                                                LEFT JOIN PostTag pt on p.Id = pt.PostId
@@ -200,10 +201,9 @@ namespace TabloidCLI
                             Title = reader.GetString(reader.GetOrdinal("Title")),
                             Url = reader.GetString(reader.GetOrdinal("URL")),
                             PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime")),
-                            Author = reader.GetInt32(reader.GetOrdinal("AuthorId")),
 
                         };
-                        results.Add(author);
+                        results.Add(post);
                     }
 
                     reader.Close();
