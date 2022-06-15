@@ -54,7 +54,7 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT p.id,
+                    cmd.CommandText = @"SELECT p.id AS PostId,
                                                p.Title As PostTitle,
                                                p.URL AS PostUrl,
                                                p.PublishDateTime,
@@ -82,8 +82,8 @@ namespace TabloidCLI
                             post = new Post()
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("PostId")),
-                                Title = reader.GetString(reader.GetOrdinal("Title")),
-                                Url = reader.GetString(reader.GetOrdinal("Url")),
+                                Title = reader.GetString(reader.GetOrdinal("PostTitle")),
+                                Url = reader.GetString(reader.GetOrdinal("PostUrl")),
                                 PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime")),
                                 Author = new Author()
                                 {
