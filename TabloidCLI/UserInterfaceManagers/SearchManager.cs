@@ -37,6 +37,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     SearchPosts();
                     return this;
                 case "4":
+                    SearchAll();
                     return this;
                 case "0":
                     return _parentUI;
@@ -94,6 +95,42 @@ namespace TabloidCLI.UserInterfaceManagers
             else
             {
                 results.Display();
+            }
+        }
+
+        private void SearchAll()
+        {
+            Console.Write("Tag> ");
+            string tagName = Console.ReadLine();
+            SearchResults<Author> aResults = _tagRepository.SearchAuthors(tagName);
+            SearchResults<Blog> bResults = _tagRepository.SearchBlogs(tagName);
+            SearchResults<Post> pResults = _tagRepository.SearchPosts(tagName);
+            if (aResults.NoResultsFound)
+            {
+                Console.WriteLine($"No results for {tagName} in Authors");
+            }
+            else
+            {
+                Console.WriteLine($"{tagName} Authors:");
+                aResults.Display();
+            }
+            if (bResults.NoResultsFound)
+            {
+                Console.WriteLine($"No results for {tagName} in Blogs");
+            }
+            else
+            {
+                Console.WriteLine($"{tagName} Blogs:");
+                bResults.Display();
+            }
+            if (pResults.NoResultsFound)
+            {
+                Console.WriteLine($"No results for {tagName} in Posts");
+            }
+            else
+            {
+                Console.WriteLine($"{tagName} Posts:");
+                pResults.Display();
             }
         }
     }
