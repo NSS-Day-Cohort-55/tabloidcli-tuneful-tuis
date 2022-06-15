@@ -81,7 +81,19 @@ namespace TabloidCLI
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM BlogTag WHERE TagId = @id
+                                        DELETE FROM AuthorTag WHERE TagId = @id
+                                        DELETE FROM PostTag WHERE TagId = @id
+                                        DELETE FROM Tag WHERE Id = @id;";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public SearchResults<Author> SearchAuthors(string tagName)
