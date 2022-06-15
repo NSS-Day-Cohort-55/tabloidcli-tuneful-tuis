@@ -49,9 +49,8 @@ namespace TabloidCLI.UserInterfaceManagers
                     Add();
                     return this;
                 case "4":
-                    throw new NotImplementedException();
-                    //Edit();
-                    //return this;
+                    Edit();
+                    return this;
                 case "5":
                     Remove();
                     return this;
@@ -120,28 +119,27 @@ namespace TabloidCLI.UserInterfaceManagers
         private void Edit()
         {
 
-            throw new NotImplementedException();
-            //Blog blogToEdit = Choose("Which blog would you like to edit?");
-            //if (blogToEdit == null)
-            //{
-            //    return;
-            //}
+            Blog blogToEdit = Choose("Which blog would you like to edit?");
+            if (blogToEdit == null)
+            {
+                return;
+            }
 
-            //Console.WriteLine();
-            //Console.Write("New title (blank to leave unchanged): ");
-            //string title = Console.ReadLine();
-            //if (!string.IsNullOrWhiteSpace(title))
-            //{
-            //    blogToEdit.Title = title;
-            //}
-            //Console.Write("New URL (blank to leave unchanged): ");
-            //string url = Console.ReadLine();
-            //if (!string.IsNullOrWhiteSpace(url))
-            //{
-            //    blogToEdit.Url = url;
-            //}
+            Console.WriteLine();
+            Console.Write("New title (blank to leave unchanged): ");
+            string title = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                blogToEdit.Title = title;
+            }
+            Console.Write("New URL (blank to leave unchanged): ");
+            string url = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                blogToEdit.Url = url;
+            }
 
-            //_blogRepository.Update(blogToEdit);
+            _blogRepository.Update(blogToEdit);
         }
 
         private void Remove()
