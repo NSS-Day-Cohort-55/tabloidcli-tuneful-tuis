@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using Microsoft.Data.SqlClient;
 using TabloidCLI.Models;
 using TabloidCLI.Repositories;
@@ -187,5 +188,39 @@ namespace TabloidCLI
                 }
             }
         }
-     }
+
+        public Author PostAndBlogCount(int authorId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"select a.Id, count (p.AuthorId) as 'total posts', count (distinct p.blogid) as 'total blogs'
+                                        from post p
+                                        join author a on a.Id = p.AuthorId and a.Id = @authorId
+                                        group by a.Id, p.AuthorId";
+                    cmd.Parameters.AddWithValue("@authorId", authorId);
+
+
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    Author author = null;
+                    while (reader.Read())
+                    {
+
+                        author = new Author()
+                        {
+                            PostCount = reader.GetInt32(reader.GetOrdinal("total posts")),
+                            BlogCount = reader.GetInt32(reader.GetOrdinal("total blogs"))
+                        };
+                    }
+                    reader.Close();
+                    return author;
+
+                }
+
+            }
+        }
+    }
 }

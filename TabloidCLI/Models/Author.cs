@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TabloidCLI.Models
 {
@@ -9,6 +10,10 @@ namespace TabloidCLI.Models
         public string LastName { get; set; }
         public string Bio { get; set; }
         public List<Tag> Tags { get; set; } = new List<Tag>();
+
+        public int PostCount { get; set; }
+
+        public int BlogCount { get; set; }
 
         public string FullName
         {

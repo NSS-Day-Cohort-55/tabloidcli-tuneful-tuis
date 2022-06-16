@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using TabloidCLI.Models;
 using TabloidCLI.Repositories;
 
@@ -59,6 +60,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private void View()
         {
             Author author = _authorRepository.Get(_authorId);
+            Author postCount = _authorRepository.PostAndBlogCount(_authorId);
             Console.WriteLine($"Name: {author.FullName}");
             Console.WriteLine($"Bio: {author.Bio}");
             Console.WriteLine("Tags:");
@@ -66,7 +68,10 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 Console.WriteLine(" " + tag);
             }
+            Console.WriteLine($"Number of posts: {postCount.PostCount}");
+            Console.WriteLine($"Number of blogs: {postCount.BlogCount}");
             Console.WriteLine();
+
         }
 
         private void ViewBlogPosts()
